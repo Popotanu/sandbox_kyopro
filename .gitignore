@@ -10,6 +10,7 @@
 *.obj
 
 # Precompiled Headers
+
 *.gch
 *.pch
 
@@ -89,4 +90,12 @@ build-iPhoneSimulator/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
+
+tempCodeRunnerFile.cpp
+
+# atcoder-tools
+in_*.txt
+out_*.txt
+metadata.json
+CMakeLists.txt
 
