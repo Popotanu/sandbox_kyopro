@@ -17,8 +17,22 @@ using namespace std;
 
 int N;
 string A[1009];
-int main() {
 
-  cin >> N;
-  // cout << N << endl;
+int main()
+{
+  string S, T;
+  string a;
+  cin >> S >> T;
+
+  a += S;
+  a += S;
+
+  if (a.find(T) != string::npos)
+  {
+    cout << "Yes" << endl;
+  }
+  else
+  {
+    cout << "No" << endl;
+  }
 }
