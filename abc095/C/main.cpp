@@ -24,10 +24,9 @@ int main() {
   // 最初に全部ABピザで賄おうとする
   // 1枚ずつABピザを減らして，その分をAピザBピザで補う
   // ABピザの初期枚数:max(X,Y)*2枚
-  // から0枚までABピザを1枚ずつ減らし，価格の総和のminをとる
+  // から0枚までABピザを1枚ずつ減らし，価格の合計のminをとる
   int ans = C * max(X, Y) * 2;
   rrep(i, max(X, Y), 0) {
-    if (i % 2) continue;
     int c = C * i * 2;
     int a = A * max(0, X - i);
     int b = B * max(0, Y - i);
