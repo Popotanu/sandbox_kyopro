@@ -21,16 +21,10 @@ int main() {
   cin >> A >> B >> W;
   W *= 1000;
 
-  int min = 1e9;
-  int max = 0;
-  rep(i, 1, 1000 * W) {
-    if (A * i <= W && B * i >= W) {
-      min = std::min(min, i);
-      max = std::max(max, i);
-    }
-  }
+  int max = floor((float)W / (float)A);
+  int min = ceil((float)W / (float)B);
 
-  if (max == 0) {
+  if (max < min) {
     cout << "UNSATISFIABLE";
   } else {
     cout << min << " " << max;
