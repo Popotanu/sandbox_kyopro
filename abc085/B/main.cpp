@@ -19,12 +19,15 @@ int N;
 string A[1009];
 int main() {
   cin >> N;
-  set<int> d;
-  rep(i, 0, N) {
-    int dd;
-    cin >> dd;
-    d.insert(dd);
-  }
 
-  cout << d.size() << endl;
+  vector<int> d(N), bucket(100);
+  fore(i, d) cin >> i;
+  fore(i, d) bucket.at(i - 1)++;
+
+  int ans = accumulate(all(bucket), 0, [](int acc, const int &i) {
+    i &&acc++;
+    return acc;
+  });
+
+  cout << ans << endl;
 }
