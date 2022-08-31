@@ -16,32 +16,30 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 
 int N;
-string A[1009];
 int main() {
   // 1 <= N <=50
   // 1 <= S_i(ひとつの文字列) <=50
   // 2500かな？ a=2500として,  O(a^2*loga)はいける, O(a^3)はTLE
 
   cin >> N;
-  map<char, int> S;
 
-  string a;
-  cin >> a;
-  fore(i, a) S[i]++;
+  vector<vector<int>> A(N, vector<int>(26));
 
-  rep(i, 1, N) {
-    string b;
-    cin >> b;
-    map<char, int> T;
-    fore(bb, b) { T[bb]++; }
-    fore(ss, S) { ss.second = min(ss.second, T[ss.first]); }
+  fore(a, A) {
+    string s;
+    cin >> s;
+    fore(ss, s) a[ss - 'a']++;
   }
 
-  string ans = "";
+  // 行列？を縦に見て,'各文字がどれだけ共通してるか'を調べていく
 
-  fore(i, S) {
-    string tanu(i.second, i.first);
-    ans += tanu;
+  string ans = "";
+  rep(i, 0, 26) {
+    int m = 1e9;
+
+    fore(a, A) { m = min(m, a[i]); }
+    string s(m, 'a' + i);
+    ans += s;
   }
 
   cout << ans << endl;
