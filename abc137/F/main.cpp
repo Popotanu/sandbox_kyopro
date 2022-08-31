@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define _GLIBCXX_DEBUG  // 空の構造に対して未定義な操作を行ったときに例外を投げる
+#define _GLIBCXX_DEBUG // 空の構造に対して未定義な操作を行ったときに例外を投げる
 #ifdef LOCAL
 #define dbg(x) cout << __LINE__ << " : " << #x << " = " << (x) << endl
 #else
@@ -18,20 +18,7 @@ using namespace std;
 int N;
 string A[1009];
 int main() {
+
   cin >> N;
-
-  map<string, long long> s;
-  rep(i, 0, N) {
-    string ss;
-    cin >> ss;
-    sort(all(ss));
-    s[ss]++;
-  }
-
-  long long ans = accumulate(
-      s.begin(), s.end(), 0LL, [](long long acc, const auto &current) {
-        return acc + (current.second * (current.second - 1) / 2);
-      });
-
-  cout << ans << endl;
+  // cout << N << endl;
 }
