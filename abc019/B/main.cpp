@@ -18,7 +18,21 @@ using namespace std;
 int N;
 string A;
 int main() {
+  cin >> A;
+  vector<pair<char, int>> p;
+  char prev = A[0];
+  int count = 1;
+  rep(i, 1, A.size()) {
+    if (prev != A[i]) {
+      p.push_back({prev, count});
+      prev = A[i];
+      count = 1;
+    } else {
+      count++;
+    }
+  }
+  p.push_back({prev, count});
 
-  cin >> N;
-  //cout << N << endl;
+  fore(pair, p) { cout << pair.first << pair.second; }
+  cout << endl;
 }

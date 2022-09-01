@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define _GLIBCXX_DEBUG  // 空の構造に対して未定義な操作を行ったときに例外を投げる
+#define _GLIBCXX_DEBUG // 空の構造に対して未定義な操作を行ったときに例外を投げる
 #ifdef LOCAL
 #define dbg(x) cout << __LINE__ << " : " << #x << " = " << (x) << endl
 #else
@@ -16,9 +16,9 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 
 int N;
-string A;
+string A[1009];
 int main() {
 
   cin >> N;
-  //cout << N << endl;
+  // cout << N << endl;
 }
