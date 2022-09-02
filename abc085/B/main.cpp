@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define _GLIBCXX_DEBUG  // 空の構造に対して未定義な操作を行ったときに例外を投げる
+#define _GLIBCXX_DEBUG // 空の構造に対して未定義な操作を行ったときに例外を投げる
 #ifdef LOCAL
 #define dbg(x) cout << __LINE__ << " : " << #x << " = " << (x) << endl
 #else
@@ -16,18 +16,9 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 
 int N;
-string A[1009];
+string A;
 int main() {
+
   cin >> N;
-
-  vector<int> d(N), bucket(100);
-  fore(i, d) cin >> i;
-  fore(i, d) bucket.at(i - 1)++;
-
-  int ans = accumulate(all(bucket), 0, [](int acc, const int &i) {
-    i &&acc++;
-    return acc;
-  });
-
-  cout << ans << endl;
+  // cout << N << endl;
 }

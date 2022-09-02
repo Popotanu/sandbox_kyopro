@@ -16,7 +16,7 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 
 int N;
-string A[1009];
+string A;
 int main() {
 
   cin >> N;
