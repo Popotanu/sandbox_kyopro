@@ -23,7 +23,7 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 
 int N;
 string A;
-int _main() {
+void _main() {
 
   cin >> N;
   //cout << N << endl;
