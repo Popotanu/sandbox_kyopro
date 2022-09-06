@@ -25,7 +25,7 @@ int N, M;
 string A;
 void _main() {
   cin >> N >> M;
-  vector<int> H(N);
+  vector<long long> H(N);
   fore(i, H) cin >> i;
 
   vector<vector<int>> G(N);
@@ -41,8 +41,10 @@ void _main() {
   rep(i, 0, G.size()) {
     bool highest = true;
     rep(j, 0, G[i].size()) {
-      if (H[i] <= H[G[i][j]]) highest = false;
-      break;
+      if (H[i] <= H[G[i][j]]) {
+        highest = false;
+        break;
+      }
     }
     if (highest) ans++;
   }
