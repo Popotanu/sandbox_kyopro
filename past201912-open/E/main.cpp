@@ -44,19 +44,30 @@ void _main() {
         if (found != G[j].end()) G[x].push_back(j);
       }
     } else {
-      // follow follow
-      fore(k, G[x]) { fore(l, G[k]) G[x].push_back(l); }
+      vector<int> following;
+      rep(k, 0, G[x].size()) {
+        rep(l, 0, G[G.at(x).at(k)].size()) {
+          int n = G[G[x][k]][l];
+          if (n != x) {
+            following.push_back(n);
+          }
+        }
+      }
+
+      fore(i, following) G.at(x).push_back(i);
     }
   }
 
   // YYNYNN
   // NNYNNN
   // ...
+
   fore(i, G) {
+    string ans(N, 'N');
     rep(j, 0, N) {
       auto found = find(all(i), j);
-      cout << (found != i.end() ? "Y" : "N");
+      if (found != i.end()) ans[j] = 'Y';
     }
-    cout << endl;
+    cout << ans << endl;
   }
 }
