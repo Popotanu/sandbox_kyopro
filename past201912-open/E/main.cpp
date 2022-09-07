@@ -38,18 +38,17 @@ void _main() {
       b--;
       G[x].push_back(b);
     } else if (t == 2) {
-      // refollow
       rep(j, 0, G.size()) {
         auto found = find(all(G[j]), x);
         if (found != G[j].end()) G[x].push_back(j);
       }
     } else {
-      vector<int> following;
+      set<int> following;
       rep(k, 0, G[x].size()) {
         rep(l, 0, G[G.at(x).at(k)].size()) {
           int n = G[G[x][k]][l];
           if (n != x) {
-            following.push_back(n);
+            following.insert(n);
           }
         }
       }
