@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// clang-format off
 #define _GLIBCXX_DEBUG  // 空の構造に対して未定義な操作を行ったときに例外を投げる
 #ifdef LOCAL
 #define dbg(x) cout << __LINE__ << " : " << #x << " = " << (x) << endl
@@ -14,38 +15,16 @@ using namespace std;
 #define rrep(i, a, b) for (int i = a; i >= b; i--)
 #define fore(i, a) for (auto &i : a)
 #define all(x) (x).begin(), (x).end()
+void _main(); int main() { cin.tie(0); ios::sync_with_stdio(false); _main(); }
+typedef long long ll; const int inf = INT_MAX / 2; const ll infl = 1LL << 60;
+template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
+template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
+// clang-format on
 
 int N;
-string S;
-int main() {
-  cin >> S;
+string A;
+void _main() {
 
-  vector<string> words;
-
-  rep(i, 0, S.size()) {
-    string word;
-    int j = i + 1;
-    while (j < S.size() && islower(S[j])) {
-      j++;
-    }
-    word = S.substr(i, j + 1 - i);
-
-    word.front() = tolower(word.front());
-    word.back() = tolower(word.back());
-
-    words.push_back(word);
-
-    i = j;
-  }
-
-  sort(all(words));
-
-  string ans;
-  fore(w, words) {
-    string tmp = w;
-    tmp.front() = toupper(tmp.front());
-    tmp.back() = toupper(tmp.back());
-    ans += tmp;
-  }
-  cout << ans << endl;
+  cin >> N;
+  // cout << N << endl;
 }
