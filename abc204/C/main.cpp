@@ -23,11 +23,13 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 
 int N, M;
 string A;
+// 引数としてGをわたすのが面倒だったら
+// グローバルで宣言しておいて，あとから
+// G.resize(N);とかしてもいい.
 
-int dfs(const vector<vector<int>>& G, const int& v, vector<bool> seen) {
+int dfs(const vector<vector<int>>& G, const int& v, vector<bool>& seen) {
   if (seen[v]) return 0;
   seen[v] = true;
-
   int ret = 0;
   fore(vv, G[v]) { ret += dfs(G, vv, seen); }
   return ret + 1;
@@ -39,18 +41,21 @@ void _main() {
   // 条件よりグラフは単純．
   cin >> N >> M;
 
+  // G.resize(N);
   vector<vector<int>> G(N);
+
   rep(i, 0, M) {
     int u, v;
     cin >> u >> v;
     u--, v--;
-
     G[u].push_back(v);
   }
 
+  vector<bool> seen(N, false);
   int ans = 0;
+
   rep(v, 0, G.size()) {
-    vector<bool> seen(N, false);
+    seen.assign(N, false);
     ans += dfs(G, v, seen);
   }
 
