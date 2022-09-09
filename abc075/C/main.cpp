@@ -21,38 +21,59 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
+struct UnionFind {
+  vector<int> par, siz;
+
+  UnionFind(int n) : par(n, -1), siz(n, 1) {}
+
+  int root(int x) {
+    if (par[x] == -1) return x;
+    return root(par[x]);
+  }
+
+  bool is_same(int x, int y) { return root(x) == root(y); }
+
+  bool unite(int x, int y) {
+    x = root(x);
+    y = root(y);
+    if (x == y) return false;
+    if (x < y) swap(x, y);
+
+    par[y] = x;
+    siz[x] += siz[y];
+    return true;
+  }
+
+  int size(int x) { return siz[root(x)]; }
+};
+
 int N, M;
-string A;
-bitset<50> G[50];
 void _main() {
   // 単純連結無向グラフの橋の本数を求める
   // N <=50, M <=50
   cin >> N >> M;
 
+  vector<int> A(M), B(M);
+
   rep(i, 0, M) {
-    int u, v;
-    cin >> u >> v;
-    u--, v--;
-    G[u][v] = true;
-    G[v][u] = true;
+    cin >> A[i] >> B[i];
+    A[i]--;
+    B[i]--;
   }
 
-  // fore(i, G) { cout << i << endl; }
-
   int ans = 0;
-
-  rep(v, 0, N) {
-    bitset<50> now = G[v];
-    rep(h, 0, N) {
-      if (v == h) continue;
-
-      now.set(v);
-      auto andd = now & G[h];
-      if (andd.test(v) && andd.count() == 1) {
+  rep(i, 0, M) {
+    UnionFind uf(N);
+    rep(j, 0, M) {
+      if (i != j) uf.unite(A[j], B[j]);
+    }
+    rep(k, 0, N - 1) {
+      if (!uf.is_same(N - 1, k)) {
         ans++;
+        break;
       }
     }
   }
 
-  cout << ans / 2 << endl;
+  cout << ans << endl;
 }
