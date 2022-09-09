@@ -21,10 +21,27 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
-int N;
-string A;
+int H, W;
+string M[50];
 void _main() {
+  cin >> H >> W;
+  rep(h, 0, H) { cin >> M[h]; }
 
-  cin >> N;
-  // cout << N << endl;
+  rep(h, 0, H) {
+    rep(w, 0, W) {
+      if (M[h][w] == '#') continue;
+      int a = 0;
+      rep(i, -1, 2) {
+        rep(j, -1, 2) {
+          if (h + i < 0 || w + j < 0) continue;
+          if (h + i >= H || w + j >= W) continue;
+          if (M[h + i][w + j] == '#') a++;
+        }
+      }
+
+      M[h][w] = a + '0';
+    }
+  }
+
+  rep(h, 0, H) { cout << M[h] << endl; }
 }
