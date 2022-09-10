@@ -24,7 +24,6 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 int N;
 string A;
 void _main() {
-
-  cin >> N;
-  // cout << N << endl;
+  cin >> A;
+  cout << (A[3] == '-' ? "Yes" : "No") << endl;
 }
