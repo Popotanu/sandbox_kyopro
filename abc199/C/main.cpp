@@ -24,28 +24,49 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 int N, Q;
 string S;
 void _main() {
+  // N<= 2*10^5
+  // Q<= 3*10^5
   cin >> N >> S >> Q;
 
   // abcd efgh
+  // 2
+  // 1 2 5
+  // N=4
   // efgh abcd
+  // eagh fbcd
+  // fbcd eagh
+  // abcd efgh
 
   // T=1: 互換(A_i B_i)
-
   // T=2: 前半分とうしろ半分を交換
   // 反転して真ん中で分けてそれぞれもっかい反転すれば良さそう
 
+  // T2が奇数回のときにT1が呼ばれたときは
+  // Z/2NZを考えて
+  // swapするindexを,index+NしてあげればOK
+
+  bool is_t2 = false;
   rep(i, 0, Q) {
     int t, a, b;
     cin >> t >> a >> b;
     if (t == 1) {
       a--;
       b--;
+      if (is_t2) {
+        a = (a + N) % (2 * N);
+        b = (b + N) % (2 * N);
+      }
       swap(S[a], S[b]);
     } else {
-      reverse(all(S));
-      reverse(S.begin(), S.begin() + N);
-      reverse(S.end() - N, S.end());
+      // reverse 1回で2N/2=Nかいのswap
+      // T2呼ばれるたびに毎回置換すると,O(NQ)だからTLE
+      is_t2 = !is_t2;
     }
+  }
+  if (is_t2) {
+    reverse(all(S));
+    reverse(S.begin(), S.begin() + N);
+    reverse(S.end() - N, S.end());
   }
   cout << S << endl;
 }
