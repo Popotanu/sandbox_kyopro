@@ -21,10 +21,24 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
-int N;
 string A;
 void _main() {
-
-  cin >> N;
-  // cout << N << endl;
+  char a;
+  int ans = 0;
+  bool ok = false;
+  rep(i, 0, 1000) {
+    cin >> a;
+    if (i % 4 == 0) ans++;
+    if (i % 4 == 1) {
+      if (a == 'o') {
+        ok = true;
+        break;
+      }
+    }
+  }
+  if (ok) {
+    cout << ans << endl;
+  } else {
+    cout << "none" << endl;
+  }
 }
