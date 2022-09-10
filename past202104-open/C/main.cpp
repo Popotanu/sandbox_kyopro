@@ -21,10 +21,33 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
-int N;
-string A;
+int N, M;
 void _main() {
+  cin >> N >> M;
+  int K;
+  bitset<50> A[50];
+  rep(i, 0, N) {
+    cin >> K;
+    rep(j, 0, K) {
+      int a;
+      cin >> a;
+      A[i][a] = true;
+    }
+  }
 
-  cin >> N;
-  // cout << N << endl;
+  int P, Q;
+  cin >> P >> Q;
+  bitset<50> B;
+  rep(i, 0, P) {
+    int b;
+    cin >> b;
+    B[b] = true;
+  }
+  int ans = 0;
+  rep(i, 0, 50) {
+    if ((A[i] & B).count() >= Q) {
+      ans++;
+    }
+  }
+  cout << ans << endl;
 }
