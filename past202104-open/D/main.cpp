@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// clang-format off
+#define _GLIBCXX_DEBUG  // 空の構造に対して未定義な操作を行ったときに例外を投げる
+#ifdef LOCAL
+#define dbg(x) cout << __LINE__ << " : " << #x << " = " << (x) << endl
+#else
+#define dbg(x) cout << __LINE__ << " : " << #x << " = " << (x) << endl
+// #define dbg(x) true
+#endif
+
+#define rep(i, a, b) for (int i = a; i < b; i++)
+#define rrep(i, a, b) for (int i = a; i >= b; i--)
+#define fore(i, a) for (auto &i : a)
+#define all(x) (x).begin(), (x).end()
+void _main(); int main() { cin.tie(0); ios::sync_with_stdio(false); _main(); }
+typedef long long ll; const int inf = INT_MAX / 2; const ll infl = 1LL << 60;
+template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
+template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
+// clang-format on
+
+int N, K;
+void _main() {
+  cin >> N >> K;
+  vector<long long> A(N);
+  fore(i, A) cin >> i;
+
+  vector<long long> cumsum(N + 1, 0);
+  rep(i, 0, N) { cumsum[i + 1] = cumsum[i] + A[i]; }
+
+  // 1以上N-K+1以下のすべてのxについて,
+  // A_xからA_x+K-1 までの総和
+  rep(x, K, N + 1) { cout << 1LL * cumsum[x] - cumsum[x - K] << endl; }
+}
