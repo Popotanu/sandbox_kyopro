@@ -29,12 +29,29 @@ void _main() {
   vector<int> dice(N);
   fore(i, dice) cin >> i;
 
-  vector<double> cumsum(N + 1, 0.0);
-  rep(i, 0, N + 1) {
-    cumsum[i + 1] = cumsum[i] + ((double)(1 + dice[i]) / 2.0);
+  // vector<double> cumsum(N + 1, 0.0);
+  // rep(i, 0, N + 1) {
+  //   cumsum[i + 1] = cumsum[i] + ((double)(1 + dice[i]) / 2.0);
+  // }
+  // double ans = 0.0;
+  // rep(i, K, N + 1) { chmax(ans, cumsum[i] - cumsum[i - K]); }
+
+  vector<double> E(N);
+  rep(i, 0, N) { E[i] = 1.0 * (1 + dice[i]) / 2; }
+
+  // K個の区間を先頭から見ていって，maxが答え
+  double total = 0;
+  rep(i, 0, K) total += E[i];
+
+  double ans = total;
+
+  // 調べる区間を右に1つずらしていく
+  // 右にずらしたときに,新たに含まれる要素を合計にプラスする
+  // 右にずらしたときに,区間からはみ出る要素を合計からマイナスする
+  rep(i, K, N) {
+    total = total + E[i] - E[i - K];
+    chmax(ans, total);
   }
-  double ans = 0.0;
-  rep(i, K, N + 1) { chmax(ans, cumsum[i] - cumsum[i - K]); }
 
   cout << fixed << setprecision(10);
   cout << ans << endl;
