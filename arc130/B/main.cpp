@@ -28,34 +28,32 @@ string A;
 void _main() {
   cin >> H >> W >> C >> Q;
 
-  stack<tuple<int, int, int>> commands;
+  stack<tuple<int, long long, int>> commands;
   // デフォルトは無色
   rep(i, 0, Q) {
     int t, c;
-    int n;
+    long long n;
     cin >> t >> n >> c;
     c--;
     n--;
     commands.push(make_tuple(t, n, c));
   }
 
-  vector<int> colors(C);
-  set<int> used_w;
-  set<int> used_h;
+  vector<long long> colors(C);
+  set<long long> used_w;
+  set<long long> used_h;
 
   while (commands.size()) {
-    tuple<int, int, int> command = commands.top();
+    tuple<int, long long, int> command = commands.top();
     int t, c;
-    int n;
+    long long n;
     tie(t, n, c) = command;
-    if (t == 1) {
+    if (t == 1 && !used_w.count(n)) {
       // w
-      if (used_w.count(n)) continue;
       colors[c] += W - used_h.size();
       used_w.insert(n);
-
-    } else {
-      if (used_h.count(n)) continue;
+    }
+    if (t == 2 && !used_h.count(n)) {
       colors[c] += H - used_w.size();
       used_h.insert(n);
     }
