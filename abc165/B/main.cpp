@@ -21,10 +21,15 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
-int N;
+ll N;
 string A;
 void _main() {
-
   cin >> N;
-  // cout << N << endl;
+  ll ans = 0;
+  ll yen = 100;
+  while (yen < N) {
+    ans++;
+    yen += yen / 100;
+  }
+  cout << ans << endl;
 }
