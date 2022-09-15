@@ -24,7 +24,12 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 int N;
 string A;
 void _main() {
-
-  cin >> N;
-  // cout << N << endl;
+  cin >> A;
+  vector<int> count(3);
+  fore(i, A) count[i - 'a']++;
+  int ma = -1;
+  fore(i, count) chmax(ma, i);
+  rep(i, 0, 3) {
+    if (ma == count[i]) cout << char('a' + i) << endl;
+  }
 }
