@@ -27,30 +27,7 @@ string A;
 void _main() {
   // K <= N <= 10e6
   cin >> N >> K;
-
-  if (N == K) {
-    cout << 1 << endl;
-    return;
-  }
-
-  vector<int> A(N);
-  int min_idx = 0;
-  rep(i, 0, N) {
-    int j;
-    cin >> j;
-    if (j == 1) min_idx = i;
-    A.at(i) = j;
-  }
-
-  // となりあったKこを選ぶ，最小値で更新する
-  // 区間は好きに選んでいい.front()とback()はつながってない
-  // なるべく少ない操作ですべての値を等しくしたい
-
-  // すべての値を1にする必要がある
-  // 区間の中に1があれば，それをK-1こ先まで伝搬させることができる.
-
-  int ans = ceil((float)min_idx / (float)(K - 1));
-  ans += ceil((float)(N - min_idx) / (float)(K - 1));
+  int ans = (N - 1 + K - 2) / (K - 1);
 
   cout << ans << endl;
 }
