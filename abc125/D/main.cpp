@@ -21,10 +21,28 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
+// https://atcoder.jp/contests/abc125/tasks/abc125_d
 int N;
-string A;
 void _main() {
-
+  // N<=10e5, -10e9<= A_i <=10e9
   cin >> N;
-  // cout << N << endl;
+  vector<ll> A(N);
+  int minuses = 0;
+  fore(i, A) {
+    ll n;
+    cin >> n;
+    if (n < 0) minuses++;
+    i = n;
+  }
+
+  ll mm = infl;
+  ll ans =
+      accumulate(A.begin(), A.end(), 0LL, [&mm](ll acc, const auto& current) {
+        mm = min(mm, abs(current));
+        return acc + abs(current);
+      });
+
+  if (minuses % 2 == 1) ans -= mm * 2;
+
+  cout << ans << endl;
 }
