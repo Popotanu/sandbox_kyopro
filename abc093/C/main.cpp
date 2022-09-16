@@ -25,24 +25,30 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 int A, B, C;
 void _main() {
   vector<int> se(3);
-  fore(i, se) cin >> i;
+  int odd = 0, even = 0;
+  fore(i, se) {
+    int n;
+    cin >> n;
+    if (n % 2) {
+      even++;
+    } else {
+      odd++;
+    }
+    i = n;
+  }
   sort(all(se));
-  A = se[0];
-  B = se[1];
-  C = se[2];
 
   int ans = 0;
-  if (C - B == 1) {
-    A++;
-    B++;
+  // いずれかの偶奇が違っていたら, 多い方に+1+1して偶奇を合わせる
+  if (odd == 2) {
+    fore(i, se) if (i % 2 == 0) i++;
+    ans++;
+  } else if (even == 2) {
+    fore(i, se) if (i % 2 == 1) i++;
     ans++;
   }
-  ans += (C - B) / 2;
-  ans += (C - A) / 2;
 
-  if ((A ^ B) & 1) {
-    ans += 2;
-  }
-
+  ans += (se[2] - se[1]) / 2;
+  ans += (se[2] - se[0]) / 2;
   cout << ans << endl;
 }
