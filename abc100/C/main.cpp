@@ -21,10 +21,28 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
+// https://atcoder.jp/contests/abc100/tasks/abc100_c
 int N;
-string A;
 void _main() {
-
+  // N<=10e4, a_1<=10e9
   cin >> N;
-  // cout << N << endl;
+  vector<ll> A(N);
+  fore(i, A) cin >> i;
+
+  // (今回は,2で割った結果が整数となることを`2で割れる`という)
+  // a_iの素因数の2の数の回数だけ2でわれる.
+  // ところで，2と3は互いに素だから
+  // a_iに3を掛けたとしても,2で割れる回数は変わらない.
+
+  int ans = 0;
+  fore(i, A) {
+    if (i % 2 == 0) {
+      while (i % 2 == 0) {
+        i /= 2;
+        ans++;
+      }
+    }
+  }
+
+  cout << ans << endl;
 }
