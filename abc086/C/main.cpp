@@ -28,14 +28,27 @@ void _main() {
   cin >> N;
   int x, y, t;
   vector<vector<int>> move(N, vector<int>(3));
+
+  // 前回の時刻と座標を持っておく
+  int pt = 0, px = 0, py = 0;
   bool ok = true;
   rep(i, 0, N) {
     cin >> t >> x >> y;
-    int d = (abs(x - 0)) + abs(y - 0);
-    if (d > t || t % 2 != d % 2) {
+
+    int dx = abs(x - px);
+    int dy = abs(y - py);
+    int dt = t - pt;
+    int d = dx + dy;
+
+    // 届かない場合 || 偶奇が不一致な場合
+    if (dt < d || dt % 2 != d % 2) {
       ok = false;
       break;
     }
+
+    pt = t;
+    px = x;
+    py = y;
   }
 
   cout << (ok ? "Yes" : "No") << endl;
