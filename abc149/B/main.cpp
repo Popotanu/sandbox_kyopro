@@ -40,56 +40,17 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
-// https://atcoder.jp/contests/diverta2019/tasks/diverta2019_c
-int N;
+// https://atcoder.jp/contests/abc149/tasks/abc149_b
+ll A, B, K;
 string S;
 void _main() {
-  cin >> N;  // <=10e4
+  cin >> A >> B >> K;  // <=10e12
 
-  // i.BxA: 1,2,3とくっつく
-  // ii.xxA: 1,3とくっつく
-  // iii.Bxx: 1,2とくっつく
-  // iv.xxx
+  ll a = min(K, A);
+  A -= a;
+  K -= a;
 
-  // 上界は？
-  // s_iの端っこの文字だけを考える(中身は一旦無視する)と,
-  // a, 1,3のペアで+1
-  // b, 2,1のペアで+1
-  // c, 1,1のペアで+1
-  //    BxA BxA BxA: 1の数-1だけペア
-  // ひとつの1を2と3で共有できる
-  // xxA BxA Bxx で+2できる
+  B -= min(K, B);
 
-  // よって上界は
-  // 2,3が存在する場合
-  // min(i,iii) + min(i,ii) = i + min(ii , iii)
-
-  // しない場合
-  // max(i-1,0)
-
-  // 上限は？
-
-  int a = 0, b = 0, c = 0;
-  int ans = 0;
-  rep(i, 0, N) {
-    cin >> S;
-    rep(j, 0, S.size() - 1) {
-      if (S[j] == 'A' && S[j + 1] == 'B') ans++;
-    }
-    if (S.front() == 'B' && S.back() == 'A') {
-      a++;
-    } else if (S.front() == 'B') {
-      c++;
-    } else if (S.back() == 'A') {
-      b++;
-    }
-  }
-
-  if (b == 0 && c == 0) {
-    ans += max(a - 1, 0);
-  } else {
-    ans += a + min(b, c);
-  }
-
-  cout << ans << endl;
+  cout << A << " " << B << endl;
 }
