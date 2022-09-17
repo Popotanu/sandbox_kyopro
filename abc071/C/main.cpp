@@ -45,31 +45,23 @@ int N;
 string S;
 void _main() {
   cin >> N;  // <=10e5
+  vector<int> A(N);
+  fore(i, A) cin >> i;
 
-  map<ll, int> A;
-
-  // 棒の長さをmapのindexにする
-
-  // mapを逆順から見てく方法わからないから,
-  // 棒の長さをマイナスとして扱う，答えだすときにプラスに戻す
+  vector<int> v;
+  map<int, int> cnt;
   rep(i, 0, N) {
-    ll a;
-    cin >> a;
-    A[-a]++;
-  }
+    cnt[A[i]]++;
 
-  ll b = 0, c = 0;
-  fore(i, A) {
-    if (i.second / 4) {
-      b = i.first * -1;
-      c = i.first * -1;
-    } else if (i.second / 2) {
-      if (b) swap(b, c);
-      b = i.first * -1;
+    if (cnt[A[i]] == 2) {
+      cnt[A[i]] = 0;
+      v.push_back(A[i]);
     }
-    if (b && c) break;
   }
 
-  ll ans = b * c;
+  sort(v.begin(), v.end(), greater<int>());
+  ll ans = 0;
+  if (2 <= v.size()) ans = 1LL * v[0] * v[1];
+
   cout << ans << endl;
 }
