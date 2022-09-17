@@ -100,3 +100,4 @@ metadata.json
 CMakeLists.txt
 main
 
+ac-library/

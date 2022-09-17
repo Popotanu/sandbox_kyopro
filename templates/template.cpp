@@ -2,6 +2,27 @@
 
 using namespace std;
 
+
+/* -------------ACL--------------- */
+// #include <atcoder/fenwicktree>
+// #include <atcoder/segtree>
+// #include <atcoder/lazysegtree>
+// #include <atcoder/string>
+//
+// #include <atcoder/math>
+// #include <atcoder/convolution>
+// #include <atcoder/modint>
+//
+// #include <atcoder/dsu>
+// #include <atcoder/maxflow>
+// #include <atcoder/mincostflow>
+// #include <atcoder/scc>
+// #include <atcoder/twosat>
+//
+// using namespace atcoder;
+/* ------------------------------- */
+
+
 // clang-format off
 #define _GLIBCXX_DEBUG  // 空の構造に対して未定義な操作を行ったときに例外を投げる
 #ifdef LOCAL
@@ -22,9 +43,11 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 // clang-format on
 
 int N;
-string A;
+string S;
 void _main() {
 
   cin >> N;
-  //cout << N << endl;
+
+  int ans = 0;
+  cout << ans << endl;
 }
