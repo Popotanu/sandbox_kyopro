@@ -41,7 +41,35 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 // clang-format on
 
 int N, M;
-string S;
+vector<int> P;
+int check(vector<vector<bool>>& lamp, vector<bool>& sw) {
+  bool ok = true;
+  rep(i, 0, lamp.size()) {
+    int on = 0;
+    rep(j, 0, lamp[i].size()) {
+      if (sw[j] & lamp[i][j]) on++;
+    }
+
+    if (on % 2 != P[i]) ok = false;
+  }
+
+  return ok;
+}
+
+int rec(vector<vector<bool>>& lamp, vector<bool> sw) {
+  if (sw.size() == N) {
+    return check(lamp, sw);
+  }
+
+  int result = 0;
+  rep(i, 0, 2) {
+    sw.push_back(i % 2 == 1);
+    result += rec(lamp, sw);
+    sw.pop_back();
+  }
+
+  return result;
+}
 void _main() {
   cin >> N >> M;  // <=10
 
@@ -56,22 +84,9 @@ void _main() {
     }
   }
 
-  vector<int> P(M);
+  P.resize(M);
   fore(i, P) cin >> i;
 
-  int ans = 0;
-  rep(mask, 0, 1 << N) {
-    bool ok = true;
-    rep(i, 0, M) {
-      int on = 0;
-      rep(j, 0, N) {
-        if (lamps[i][j] && mask & (1 << j)) on++;
-      }
-      if (on % 2 != P[i]) ok = false;
-    }
-
-    if (ok) ans++;
-  }
-
-  cout << ans << endl;
+  vector<bool> sw;
+  cout << rec(lamps, sw) << endl;
 }
