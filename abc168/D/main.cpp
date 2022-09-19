@@ -40,24 +40,10 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
+// https://atcoder.jp/contests/abc168/tasks/abc168_d
 int N, M;
 string S;
-vector<int> signpost;
 
-void bfs(const vector<vector<int>>& G, queue<int> qu, set<int> seen) {
-  if (seen.size() == N || qu.empty()) return;
-
-  int cur = qu.front();
-  qu.pop();
-
-  fore(i, G[cur]) {
-    if (seen.count(i)) continue;
-    qu.push(i);
-    seen.insert(i);
-    signpost[i] = cur;
-    bfs(G, qu, seen);
-  }
-}
 void _main() {
   cin >> N >> M;
 
@@ -77,13 +63,23 @@ void _main() {
 
   queue<int> que;
   set<int> seen;
-  signpost.resize(N);
+  vector<int> signpost(N);
   que.push(0);
   seen.insert(0);
   signpost.push_back(0);
 
-  bfs(G, que, seen);
+  while (!que.empty()) {
+    int cur = que.front();
+    que.pop();
 
-  cout << "Yes" << endl;
+    fore(i, G[cur]) {
+      if (seen.count(i)) continue;
+      signpost[i] = cur;
+      que.push(i);
+      seen.insert(i);
+    }
+  }
+
+  cout << "Yes" << endl;  // 問題文の条件より自明
   rep(i, 1, N) { cout << ++signpost[i] << endl; }
 }
