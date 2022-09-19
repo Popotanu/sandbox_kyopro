@@ -40,31 +40,36 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
+// https://atcoder.jp/contests/past202005-open/tasks/past202005_g
+const int BASE = 250;
+const int MA = 500;
 int N, X, Y;
 vector<int> dx = {1, 0, -1, 1, -1, 0};
 vector<int> dy = {1, 1, 1, 0, 0, -1};
 void _main() {
   cin >> N >> X >> Y;
-  X += 200;
-  Y += 200;
+  X += BASE;
+  Y += BASE;
 
   vector<pair<int, int>> D(N);
   fore(i, D) {
     int a, b;
     cin >> a >> b;
-    a += 200;
-    b += 200;
+    a += BASE;
+    b += BASE;
     i.first = a;
     i.second = b;
   }
 
   queue<pair<int, int>> que;
-  vector<vector<int>> dist(401, vector<int>(401, -1));
+  vector<vector<int>> dist(501, vector<int>(501, -1));
 
-  que.push({200, 200});
-  dist[200][200] = 0;
+  assert(dist[MA][MA] == -1);
 
-  while (!que.empty() || dist[X][Y] == -1) {
+  que.push({BASE, BASE});
+  dist[BASE][BASE] = 0;
+
+  while (!que.empty() && dist[X][Y] == -1) {
     int x = que.front().first;
     int y = que.front().second;
     que.pop();
@@ -72,7 +77,7 @@ void _main() {
     rep(i, 0, 6) {
       int nx = x + dx[i];
       int ny = y + dy[i];
-      if (nx < 0 || 400 < nx || ny < 0 || 400 < ny) continue;
+      if (nx < 0 || MA < nx || ny < 0 || MA < ny) continue;
       if (dist[nx][ny] != -1) continue;
 
       bool keep_on = true;
