@@ -41,11 +41,17 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 // clang-format on
 
 int N;
-string S;
+string S[3];
+
+char duel(string SS[3], char turn) {
+  int myturn = turn - 'a';
+  if (SS[myturn].size() == 0) return toupper(turn);
+
+  char nex = SS[myturn][0];
+  SS[myturn].erase(SS[myturn].begin());
+  return duel(SS, nex);
+}
 void _main() {
-
-  cin >> N;
-
-  int ans = 0;
-  cout << ans << endl;
+  rep(i, 0, 3) { cin >> S[i]; }
+  cout << duel(S, 'a') << endl;
 }
