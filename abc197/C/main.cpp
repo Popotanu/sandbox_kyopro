@@ -44,17 +44,21 @@ int N;
 string S;
 
 ll calc(const vector<ll>& A, const vector<bool> pos) {
-  ll res = A[0];
+  vector<ll> oror;
+  oror.push_back(A[0]);
+
   rep(i, 1, N) {
     if (pos[i - 1]) {
-      res ^= A[i];
+      oror.push_back(A[i]);
     } else {
-      res |= A[i];
+      oror.back() |= A[i];
     }
   }
 
-  return res;
+  return accumulate(oror.begin(), oror.end(), 0LL,
+                    [](ll acc, const auto& current) { return acc ^ current; });
 }
+
 ll rec(const vector<ll>& A, vector<bool> pos_or) {
   if (pos_or.size() == N - 1) {
     return calc(A, pos_or);
