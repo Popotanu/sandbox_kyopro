@@ -22,32 +22,38 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 // clang-format on
 
 int N, M, X;
-string A;
+vector<ll> costs;
+ll rec(const vector<vector<int>>& A, vector<int> grasp, int books, ll cost) {
+  bool ok = true;
+  fore(i, grasp) {
+    if (i > 0) ok = false;
+  }
+  if (ok) return cost;
+
+  ll result = infl;
+  if (books < 0) return result;
+
+  // えらばない
+  result = min(result, rec(A, grasp, books - 1, cost));
+
+  // えらぶ
+  rep(i, 0, M) { grasp[i] -= A[books][i]; }
+  result = min(result, rec(A, grasp, books - 1, cost + costs[books]));
+
+  return result;
+}
 void _main() {
-  //  books >> algorithms >> aim
   cin >> N >> M >> X;
-
-  vector<vector<int>> books(N, vector<int>(M));
-  vector<int> prices(N);
+  vector<vector<int>> A(N, vector<int>(M));
+  costs.resize(N);
   rep(i, 0, N) {
-    cin >> prices[i];
-    fore(j, books[i]) cin >> j;
+    cin >> costs[i];
+    rep(j, 0, M) { cin >> A[i][j]; }
   }
 
-  int ans = inf;
-  rep(mask, 0, 1 << N) {
-    int cost = 0;
-    vector<int> grasp(M);
-    rep(i, 0, N) {
-      if (mask & (1 << i)) {
-        cost += prices[i];
-        rep(j, 0, M) grasp[j] += books[i][j];
-      }
-    }
+  vector<int> grasp(M, X);
 
-    bool satisfied = true;
-    fore(b, grasp) if (b < X) satisfied = false;
-    if (satisfied) chmin(ans, cost);
-  }
-  cout << (ans == inf ? -1 : ans) << endl;
+  ll ans = rec(A, grasp, N - 1, 0);
+  if (ans == infl) ans = -1;
+  std::cout << ans << endl;
 }
