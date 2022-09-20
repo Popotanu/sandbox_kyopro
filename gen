@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -eu
+
+atcoder-tools gen --skip-existing-problems $1 \
+&& ls -d $1/*/ | xargs -I {} cp -r templates/.vscode/ {}/.vscode 
+
+
