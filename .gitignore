@@ -94,8 +94,8 @@ build-iPhoneSimulator/
 tempCodeRunnerFile.cpp
 
 # atcoder-tools
-in_*.txt
-out_*.txt
+in*.txt
+out*.txt
 metadata.json
 CMakeLists.txt
 main
