@@ -21,10 +21,12 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
+// https://atcoder.jp/contests/abc053/tasks/abc053_b
 int N;
 string A;
 void _main() {
+  cin >> A;
 
-  cin >> N;
-  // cout << N << endl;
+  int ans = A.rfind('Z') - A.find('A') + 1;
+  cout << ans << endl;
 }
