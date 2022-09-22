@@ -21,10 +21,14 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
-int N;
-string A;
+ll A, B;
 void _main() {
-
-  cin >> N;
-  // cout << N << endl;
+  int K;
+  cin >> A >> B >> K;
+  ll a_e = min(B, A + K - 1);
+  ll b_b = max(A, B - K + 1);
+  set<ll> ss;
+  rep(i, A, a_e + 1) ss.insert(i);
+  rep(i, b_b, B + 1) ss.insert(i);
+  fore(i, ss) cout << i << endl;
 }
