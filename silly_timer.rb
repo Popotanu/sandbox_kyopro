@@ -2,18 +2,25 @@ class SecondConverter
   require "ostruct"
   RATES = OpenStruct.new({
     s: 1,
+    sec: 1,
     m: 60,
-    h: 3600
+    min: 60,
+    h: 3600,
+    hour: 3600
   })
+
+  def self.abbr_union
+    RATES.to_h.keys.join('|')
+  end
 
   # in が予約語だった
   def self.to_second(innn)
-    raise ArgumentError if !/\A[0-9].*[hms]?\z/.match?(innn)
+    raise ArgumentError if !/\A[0-9].*[#{abbr_union}]?\z/.match?(innn)
     SecondConverter.new(innn).to_second
   end
 
   def to_second
-    suffixed = /(\d*)(h|m|s)\z/.match(suffixing).to_a
+    suffixed = /(\d*)(#{self.class.abbr_union})\z/.match(suffixing).to_a
     suffixed[1].to_i * RATES[suffixed[2]]
   end
 
