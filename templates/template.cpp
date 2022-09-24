@@ -22,6 +22,8 @@ using namespace std;
 /* ------------------------------- */
 
 // clang-format off
+#define LOCAL
+
 #ifdef LOCAL
   #define _GLIBCXX_DEBUG  // 空の構造に対して未定義な操作を行ったときに例外を投げる
   #define dbg(x) cout << __LINE__ << " : " << #x << " = " << (x) << endl
@@ -39,7 +41,6 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
-#define LOCAL
 
 int N;
 string S;
