@@ -41,6 +41,7 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
+// https://atcoder.jp/contests/abc048/tasks/arc064_a
 int N;
 string S;
 void _main() {
