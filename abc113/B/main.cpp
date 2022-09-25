@@ -41,11 +41,27 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
-int N,M;
+int N;
+double A, T;
 string S;
 void _main() {
-  cin >> N;
+  cin >> N >> T >> A;
+
+  vector<double> H(N);
+  fore(i, H) {
+    double aa;
+    cin >> aa;
+    i = abs(A - (T - aa * 0.006));
+  }
 
   int ans = 0;
-  cout << ans << endl;
+  double diff = 10e6;
+
+  rep(i, 0, N) {
+    if (diff > H[i]) {
+      diff = H[i];
+      ans = i;
+    }
+  }
+  cout << ans + 1 << endl;
 }
