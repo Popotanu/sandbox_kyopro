@@ -54,7 +54,7 @@ void _main() {
 
   int ans = 0;
   int i = 0;
-  while (i < N - 1) {
+  while (i < N) {
     if (P[i] == i && P[i + 1] == i + 1) {
       ans++;
       i += 2;
