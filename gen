@@ -2,8 +2,7 @@
 
 set -eu
 
-atcoder-tools gen --skip-existing-problems $1 \
-&& ls -d $1/*/ | xargs -I {} cp -r templates/.vscode/ {}/.vscode 
+acc new $1 && ls -d $1/*/ | xargs -I {} cp -r templates/.vscode/ {}/.vscode 
 
 if [ $# -eq 2 ]; then
   echo  "cd $1/$2" | pbcopy 
