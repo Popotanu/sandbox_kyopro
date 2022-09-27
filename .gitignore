@@ -107,3 +107,7 @@ ac-library/
 
 contest.acc.json
 tests/
+test/
+
+naive*.cpp
+rand_gen.cpp

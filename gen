@@ -5,7 +5,7 @@ set -eu
 acc new $1 && ls -d $1/*/ | xargs -I {} cp -r templates/.vscode/ {}/.vscode 
 
 if [ $# -eq 2 ]; then
-  echo  "cd $1/$2" | pbcopy 
+  echo  "cd $1/$2 " | pbcopy 
 else
   echo  "cd $1" | pbcopy 
 fi
