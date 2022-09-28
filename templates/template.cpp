@@ -22,7 +22,6 @@ using namespace std;
 /* ------------------------------- */
 
 // clang-format off
-#define LOCAL
 
 #ifdef LOCAL
   #define _GLIBCXX_DEBUG  // 配列外参照をしたときにエラーをあげる(未定義な動作の代わりに)
