@@ -1,11 +1,30 @@
-#!/bin/sh
+#!/bin/bash
 
 set -eu
 
-acc new $1 && ls -d $1/*/ | xargs -I {} cp -r templates/.vscode/ {}/.vscode 
+tmpfile=$(mktemp)
+
+function rm_tmpfile {
+  [[ -f "$tmpfile" ]] && rm -f "$tmpfile"
+}
+
+# 正常終了時にtempfile消す
+trap rm_tmpfile EXIT
+# 異常終了時に消す
+trap 'trap - EXIT; rm_tmpfile; exit -1' INT PIPE TERM
+
+exec 1> >(tee -a $tmpfile)
+acc new $1 && ls -d $1/*/ | xargs -I {} cp -r templates/.vscode/ {}/.vscode  
 
 if [ $# -eq 2 ]; then
   echo  "cd $1/$2 " | pbcopy 
 else
   echo  "cd $1" | pbcopy 
 fi
+
+# acc newでコンテストが生成されたとき,問題ごとにURLがログに流れる
+# それをtmpfileに書き込んどいて, awkでURL抽出してブラウザで開く
+# `200 OK` を含む行があれば，その1行上には問題のURLが含まれてる
+awk '{if($0 ~ "200 OK"){print tmp}else{tmp=$3}}' < $tmpfile | xargs open
+
+
