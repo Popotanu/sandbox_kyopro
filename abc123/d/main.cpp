@@ -22,7 +22,6 @@ using namespace std;
 /* ------------------------------- */
 
 // clang-format off
-#define LOCAL
 
 #ifdef LOCAL
   #define _GLIBCXX_DEBUG  // 配列外参照をしたときにエラーをあげる(未定義な動作の代わりに)
@@ -42,27 +41,53 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 // clang-format on
 
 int X, Y, Z, K;
+vector<vector<ll>> cand(3);
+
+bool check(ll x, const vector<ll>& AB) {
+  ll count = 0;
+  rep(c, 0, Z) {
+    int idx = lower_bound(all(AB), x - cand[2][c]) - AB.begin();
+    count += AB.size() - idx;
+  }
+
+  return K <= count;
+}
 void _main() {
   cin >> X >> Y >> Z >> K;
-  vector<ll> A(X), B(Y), C(Z);
-  fore(i, A) cin >> i;
-  fore(i, B) cin >> i;
-  fore(i, C) cin >> i;
-  dbg(A[K - 1]);
-  dbg("=======");
-
-  priority_queue<ll> sum;
-  fore(a, A) {
-    fore(b, B) {
-      fore(c, C) { sum.push(a + b + c); }
+  vector<int> xyz = {X, Y, Z};
+  rep(i, 0, 3) {
+    rep(j, 0, xyz[i]) {
+      ll a;
+      cin >> a;
+      cand[i].push_back(a);
     }
   }
 
-  dbg(sum.size());
+  vector<ll> AB;
+  rep(a, 0, X) { rep(b, 0, Y) AB.push_back(cand[0][a] + cand[1][b]); }
+  sort(all(AB));
 
-  dbg(X * Y * Z);
-  while (!sum.empty()) {
-    cout << sum.top() << endl;
-    sum.pop();
+  ll ok = 0, bad = infl;
+  while (ok + 1 != bad) {
+    ll mid = (ok + bad) / 2;
+    check(mid, AB) ? ok = mid : bad = mid;
   }
+
+  reverse(all(AB));
+  // sort(all(cand[2], greater<ll>()));
+
+  vector<ll> ans;
+  rep(c, 0, Z) {
+    rep(ab, 0, AB.size()) {
+      ll p = cand[2][c] + AB[ab];
+      if (ok >= p) break;
+      ans.push_back(p);
+    }
+  }
+
+  while (ans.size() < K) ans.push_back(ok);
+
+  assert(ans.size() == K);
+  sort(all(ans), greater<ll>());
+  for_each(ans.begin(), ans.end(), [](auto& x) { cout << x << endl; });
 }
