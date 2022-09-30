@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "clang++ build and debug active file",
+      "name": "clang++ - Build and debug active file",
       "type": "cppdbg",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
@@ -14,6 +14,8 @@
       "cwd": "${workspaceFolder}",
       "environment": [],
       "MIMode": "lldb",
+      "preLaunchTask": "clang++ build active file",
+      "internalConsoleOptions": "openOnSessionStart",
       "externalConsole": true
     }
   ]
