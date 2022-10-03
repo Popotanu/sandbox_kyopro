@@ -110,4 +110,4 @@ tests/
 test/
 
 naive*.cpp
-rand_gen.cpp
+rgen.cpp

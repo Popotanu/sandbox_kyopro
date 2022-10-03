@@ -40,11 +40,8 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 // clang-format on
 
-int N,M;
+int N,M,Q;
 string S;
 void _main() {
   cin >> N;
-
-  int ans = 0;
-  cout << ans << endl;
 }
