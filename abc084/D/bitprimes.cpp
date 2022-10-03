@@ -53,6 +53,19 @@ void sieve() {
   }
 }
 
+// =================================
+vector<int> makeBitPrimes(int n) {
+  vector<int> v(n + 1, 1);
+  v[0] = v[1] = 0;
+  rep(i, 2, sqrt(n)) {
+    if (v[i]) {
+      for (int j = 0; i * (j + 2) < n; j++) v[i * (j + 2)] = 0;
+    }
+  }
+  return v;
+}
+// =================================
+
 void _main() {
   cin >> Q;
   is_prime.resize(N + 1, true);
