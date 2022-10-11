@@ -42,17 +42,16 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 
 int N, L, K;
 vector<int> A;
-bool isOK(int obj) {
+bool isOK(int least) {
   int remain = K;
-  int len = 0;
+  int pre = 0;
 
-  rep(i, 1, N + 2) {
-    len += A[i] - A[i - 1];
-    if (len >= obj) {
+  rep(i, 1, N + 1) {
+    if (A[i] - pre >= least && L - A[i] >= least) {
       remain--;
-      len = 0;
+      pre = A[i];
     }
-    if (remain == -1) return true;
+    if (remain == 0) return true;
   }
   return false;
 }
@@ -74,15 +73,9 @@ int binary_search(int l, int r) {
 
 void _main() {
   cin >> N >> L >> K;
-  A.resize(N + 2);
-  A[0] = 0;
+  A.resize(N + 1, 0);
 
-  rep(i, 0, N) {
-    int a;
-    cin >> a;
-    A[i + 1] = a;
-  }
-  A[N + 1] = L;
+  rep(i, 0, N) { cin >> A[i + 1]; }
 
   cout << binary_search(1, L) << endl;
 }
