@@ -52,16 +52,17 @@ void _main() {
                                            vector<vector<pair<int, int>>>(N));
 
   set<pair<int, int>> distXY;
-  rep(x, -M, M + 1) {
-    int yy = M - x * x;
-    double y = sqrt(yy);
-    if (y != floor(y)) continue;
 
-    int dx = x, dy = (int)y;
-    if (yy < 0) dy = -dy;
-    rep(i, 0, 2) {
-      if (i == 1) dx = -dx, dy = -dy;
-      distXY.insert({dx, dy});
+  // Nはたかだか400だから,次の行き先は全探索で求めてOK．
+  // 浮動小数点つかいたくない.
+  rep(x, 0, N + 1) {
+    rep(y, 0, N + 1) {
+      if (x * x + y * y == M) {
+        distXY.insert({x, y});
+        distXY.insert({-x, y});
+        distXY.insert({x, -y});
+        distXY.insert({-x, -y});
+      }
     }
   }
 
@@ -70,7 +71,7 @@ void _main() {
       fore(d, distXY) {
         int nx = x + d.first;
         int ny = y + d.second;
-        if (nx >= 0 && nx < N && ny >= 0 && ny < N) {
+        if (min(nx, ny) >= 0 && max(nx, ny) < N) {
           G[x][y].push_back({nx, ny});
         }
       }
