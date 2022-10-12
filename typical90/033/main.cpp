@@ -44,5 +44,9 @@ int N, M, Q;
 string S;
 void _main() {
   cin >> N >> M;
-  cout << ((N + 2 - 1) / 2) * ((M + 2 - 1) / 2) << endl;
+  if (N == 1 || M == 1) {
+    cout << N * M << endl;
+  } else {
+    cout << ((N + 2 - 1) / 2) * ((M + 2 - 1) / 2) << endl;
+  }
 }
