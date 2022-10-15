@@ -41,13 +41,13 @@ template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } 
 // clang-format on
 
 ll A, B;
+ll large_begin = 1e18;
 void _main() {
   cin >> A >> B;
-  double aa = (double)A / double(gcd(A, B));
-  double di = log10(aa) + log10(B);
-  if (di > 18) {
+  ll aa = A / gcd(A, B);
+  if (aa > large_begin / B) {
     cout << "Large" << endl;
   } else {
-    std::cout << lcm(A, B) << std::endl;
+    cout << aa * B << endl;
   }
 }
