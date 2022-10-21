@@ -54,29 +54,17 @@ void _main() {
     A[i] = a;
   }
 
-  vector<ll> per_combi(N + 1, 0);
-
-  ll total = 0;
-  rep(i, 0, cnt.size()) {
-    ll co = 1LL * cnt[i] * (cnt[i] - 1) / 2;
-    total += co;
-    per_combi[i] = co;
-  }
-
-  // ll tes = accumulate(
-  //     per_combi.begin(), per_combi.end(), 0LL,
-  //     [](ll acc, const auto& current) { return 1LL * acc + current; });
-  // assert(total == tes);
+  ll total =
+      accumulate(cnt.begin(), cnt.end(), 0LL, [](ll acc, const auto& current) {
+        return acc + 1LL * current * (current - 1) / 2;
+      });
 
   rep(k, 0, N) {
     int re = A[k];
-    if (per_combi[re] == 0) {
-      std::cout << total << std::endl;
-      continue;
-    }
-    ll raw = per_combi[re];
-    ll di = 1LL * (cnt[re] - 1) * (cnt[re] - 2) / 2;
+    ll ans = total;
+    ans -= 1LL * (cnt[re]) * (cnt[re] - 1) / 2;
+    ans += 1LL * (cnt[re] - 1) * (cnt[re] - 2) / 2;
 
-    std::cout << total - (raw - di) << std::endl;
+    std::cout << ans << std::endl;
   }
 }
