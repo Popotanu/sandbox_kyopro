@@ -44,8 +44,8 @@ int N, M, Q;
 const int obsession = 46;
 void _main() {
   cin >> N;
-  map<int, int> A, B, C;
-  vector<map<int, int>*> container = {&A, &B, &C};
+  vector<int> A(obsession), B(obsession), C(obsession);
+  vector<vector<int>*> container = {&A, &B, &C};
 
   fore(i, container) {
     rep(j, 0, N) {
@@ -56,11 +56,11 @@ void _main() {
   }
 
   ll ans = 0;
-  fore(a, A) {
-    fore(b, B) {
-      fore(c, C) {
-        if ((a.first + b.first + c.first) % obsession != 0) continue;
-        ans += 1LL * a.second * b.second * c.second;
+  rep(a, 0, obsession) {
+    rep(b, 0, obsession) {
+      rep(c, 0, obsession) {
+        if ((a + b + c) % 46 != 0) continue;
+        ans += 1LL * A[a] * B[b] * C[c];
       }
     }
   }
