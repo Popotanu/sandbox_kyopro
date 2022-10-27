@@ -47,20 +47,14 @@ int H, W;
 void _main() {
   cin >> H >> W;
   vector<vector<int>> A(H, vector<int>(W)), B(H, vector<int>(W));
-  int sumA = 0, sumB = 0;
-  fore(i, A) fore(j, i) cin >> j, sumA += j;
-  fore(i, B) fore(j, i) cin >> j, sumB += j;
+  fore(i, A) fore(j, i) cin >> j;
+  fore(i, B) fore(j, i) cin >> j;
   assert(A.size() == H);
 
-  if (abs(sumB - sumA) % 2 != 0) {
-    std::cout << "No" << std::endl;
-    return;
-  }
-
-  int ans = 0;
+  ll ans = 0;
   rep(h, 0, H - 1) {
     rep(w, 0, W - 1) {
-      int diff = B[h][w] - A[h][w];
+      ll diff = 1LL * B[h][w] - A[h][w];
       ans += abs(diff);
       rep(i, 0, 2) rep(j, 0, 2) A[h + i][w + j] += diff;
     }
