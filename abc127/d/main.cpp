@@ -49,33 +49,44 @@ void _main() {
   cin >> N >> M;
 
   vector<ll> A(N);
-  fore(i, A) cin >> i;
-  assert(A.size() == N);
+  ll ans = 0;
+  fore(i, A) {
+    cin >> i;
+    ans += i;
+  }
 
   sort(all(A));
 
-  priority_queue<ll> qu;
+  priority_queue<pair<ll, int>> qu;
   rep(i, 0, M) {
     int b;
     ll c;
     cin >> b >> c;
 
-    rep(j, 0, b) qu.push(c);
+    qu.push({c, b});
   }
 
-  rep(i, 0, N) {
-    if (qu.empty()) break;
-    ll q = qu.top();
+  int i = 0;
+  int satisfied = false;
+  while (!(qu.empty() || satisfied)) {
+    pair<ll, int> q = qu.top();
     qu.pop();
 
-    if (A[i] < q) {
-      A[i] = q;
-    } else {
-      break;
+    rep(j, 0, q.second) {
+      if (i == N) {
+        satisfied = true;
+        break;
+      }
+
+      if (A[i] < q.first) {
+        ans += -A[i] + q.first;
+        i++;
+      } else {
+        satisfied = true;
+        break;
+      }
     }
   }
 
-  cout << accumulate(A.begin(), A.end(), 0LL, [](ll acc, const auto& current) {
-    return 1LL * acc + current;
-  }) << endl;
+  std::cout << ans << std::endl;
 }
